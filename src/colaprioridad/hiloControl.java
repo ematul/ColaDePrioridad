@@ -45,22 +45,16 @@ public class hiloControl implements Runnable{
     {
         while(true)
             {
-                //nivel 1 /// 64 cuantos
+                //nivel 1 /// 64 cuantos - Ejemplo 15
                 boolean bandera = true;
                 int cuantos = hilo1.nivel.getCantidadCuantos();
-                System.out.println(cuantos);
                 int cont = 0;
                 while(bandera)
                 {
                     int resultado = hilo1.ejecutar();
-                    //System.out.println(resultado);
                     cont++;
                     prioridad1 = cont;
-                    if(cont == cuantos)
-                    {
-                        bandera = false;
-                    }
-                    if(resultado == 0)
+                    if(cont == cuantos || resultado == 0 )
                     {
                         bandera = false;
                     }
@@ -71,21 +65,16 @@ public class hiloControl implements Runnable{
                     }
                 }
                 
-                //nivel 2 /// 32 cuantos
+                //nivel 2 /// 32 cuantos - Ejemplo 12
                 bandera = true;
                 cuantos = hilo2.nivel.getCantidadCuantos();
                 cont = 0;
                 while(bandera)
                 {
                     int resultado = hilo2.ejecutar();
-                    //System.out.println(resultado);
                     cont++;
                     prioridad2 = cont;
-                    if(cont == cuantos)
-                    {
-                        bandera = false;
-                    }
-                    if(resultado == cuantos)
+                    if(cont == cuantos || resultado == cuantos)
                     {
                         bandera = false;
                     }
@@ -96,24 +85,16 @@ public class hiloControl implements Runnable{
                     }
                 }
                 
-                //nivel 3 /// 16 cuantos
+                //nivel 3 /// 16 cuantos - Ejemplo 9 cuantos
                 bandera = true;
                 cuantos = hilo3.nivel.getCantidadCuantos();
-                System.out.println(cuantos);
                 cont = 0;
-              
                 while(bandera)
                 {
                     int resultado = hilo3.ejecutar();
-                    //System.out.println(resultado);
                     cont++;
                     prioridad3 = cont;
-                    System.out.println(cont + "priori333");
-                    if(cont == cuantos)
-                    {
-                        bandera = false;
-                    }
-                    if(resultado == cuantos)
+                    if(cont == cuantos || resultado == cuantos)
                     {
                         bandera = false;
                     }
@@ -123,22 +104,16 @@ public class hiloControl implements Runnable{
                         Logger.getLogger(ColaPrioridad.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                //nivel 2 /// 8 cuantos
+                //nivel 2 /// 6 cuantos
                 bandera = true;
                 cuantos = hilo4.nivel.getCantidadCuantos();
-                System.out.println(cuantos);
                 cont = 0;
                 while(bandera)
                 {
                     int resultado = hilo4.ejecutar();
-                    //System.out.println(resultado);
                     cont++;
                     prioridad4 = cont;
-                    if(cont == cuantos)
-                    {
-                        bandera = false;
-                    }
-                    if(resultado == 0)
+                    if(cont == cuantos || resultado == cuantos)
                     {
                         bandera = false;
                     }
@@ -148,22 +123,16 @@ public class hiloControl implements Runnable{
                         Logger.getLogger(ColaPrioridad.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                //nivel 5 /// 4 cuantos
+                //nivel 5 /// 3 cuantos
                 bandera = true;
                 cuantos = hilo5.nivel.getCantidadCuantos();
-               
                 cont = 0;
                 while(bandera)
                 {
                     int resultado = hilo5.ejecutar();
-                    //System.out.println(resultado);
                     cont++;
                     prioridad5 = cont;
-                    if(cont == cuantos)
-                    {
-                        bandera = false;
-                    }
-                    if(resultado == 0)
+                    if(cont == cuantos || resultado == cuantos)
                     {
                         bandera = false;
                     }

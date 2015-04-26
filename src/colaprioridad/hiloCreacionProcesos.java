@@ -50,6 +50,11 @@ public class hiloCreacionProcesos implements Runnable{
             
             int cantidadProcesos = tabla.size();
             
+            try {
+                    Thread.sleep(10);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(hiloCreacionProcesos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             
             
             if(cantidadProcesos < 15)
@@ -59,7 +64,7 @@ public class hiloCreacionProcesos implements Runnable{
                 nodoProceso no;
                 int prioridad = (int)(Math.random()*5);
                 no =  new nodoProceso();
-                no.setNombre("PROC " + idProceso);
+                no.setNombre("PROCESO " + idProceso);
                 no.setDuracion(Math.random()*10);
                 no.setPrioridad(prioridad);
                 

@@ -24,27 +24,22 @@ public class Simulacion extends JFrame{
     public Simulacion() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 700);
-        setResizable(false);
+        setResizable(true);
         setTitle("Simulación Colas de Prioridad");
         setBackground(Color.gray);
         init();
     }
     
     public void init(){
-        setLocationRelativeTo(null);
-        setLayout(new GridLayout(1, 1, 0, 0));
-        
+        //setLocationRelativeTo(null);
+        //setLayout(new GridLayout(1, 1, 0, 0));
         screen = new Screen();
         add(screen);
         setVisible(true);
-        
     }
-    
-
     
     public static void main(String args[]) {
         new Simulacion();
     }
-    
     
 }

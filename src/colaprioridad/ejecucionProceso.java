@@ -56,7 +56,7 @@ public class ejecucionProceso {
                   {  
                       try 
                       {
-                          sleep(10);
+                          sleep(50);
                       } 
                       catch (InterruptedException ex) 
                       {
@@ -84,7 +84,7 @@ public class ejecucionProceso {
           else
           {
               actual = actual.getSiguiente();
-              return 1;
+              return 1; //Proceso Ejecutado, pedir siguiente.
           }
           
       }

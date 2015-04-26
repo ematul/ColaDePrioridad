@@ -251,7 +251,7 @@ public class ColaPrioridad extends javax.swing.JFrame {
                     jProgressBar1.setValue((int)tablaProcesos.get(i).getTiempoTranscurrido());
                     int avance= (int)((tablaProcesos.get(i).getTiempoTranscurrido()/tablaProcesos.get(i).getDuracion())*100);
               
-                    jProgressBar1.setString(avance + "%");
+                    jProgressBar1.setString(avance + "--%");
                     jProgressBar1.setStringPainted(true);
                 }
          
@@ -283,6 +283,7 @@ public class ColaPrioridad extends javax.swing.JFrame {
  
   /**
    * Creates a JProgressBar with the range 0,100.
+         * @param valor
    */
   public ProgressCellRenderer(int valor){
     super(0, 100);
@@ -308,7 +309,7 @@ public class ColaPrioridad extends javax.swing.JFrame {
     }
     return this;
   }
-}    
+    }    
         
         private boolean bloqueo(int i)
         {
