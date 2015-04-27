@@ -11,8 +11,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -48,23 +51,78 @@ public class Screen extends JPanel {
     
     hiloCreacionProcesos creacion;
     
-    boolean automatico = false;
+    boolean automatico = true;
+    String tAutamatico ="Activado";
     
     ArrayList <nodoProceso> tablaProcesos;
     
     //Graficos
     Graphics2D g2;
     Color[] colors = { Color.YELLOW, Color.MAGENTA, Color.CYAN , Color.RED, Color.BLUE, Color.PINK};
-    static JSlider slider;
+    Boolean background = true;
     
+    Point buttonMas;
+    Point buttonMenos;
+    Point buttonProcesos;
     
     public Screen() {
         setSize(200, 200);
-        slider = new JSlider(JSlider.VERTICAL, 0, 100, 25);
-        slider.setInverted(false);
-        slider.setPaintTicks(true); slider.setMajorTickSpacing(25); slider.setMinorTickSpacing(5); 
-        slider.setPaintLabels(true);
-        this.add(slider);
+        
+        this.addMouseListener(new MouseAdapter() {
+        public void mousePressed(MouseEvent e) {
+            Boolean bandera = false;
+            
+            if(e.getX()> buttonMenos.x && e.getX() < (buttonMenos.x + 50))
+            {
+                if(e.getY()> buttonMenos.y && e.getY() < (buttonMenos.y + 30)){
+                    hilo1.setTiempo(hilo1.getTiempo()+10);
+                    hilo2.setTiempo(hilo2.getTiempo()+10);
+                    hilo3.setTiempo(hilo3.getTiempo()+10);
+                    hilo4.setTiempo(hilo4.getTiempo()+10);
+                    hilo5.setTiempo(hilo5.getTiempo()+10);
+                    System.out.println("Click Menos");
+                    bandera = true;
+                }
+            }
+            
+            if(e.getX()> buttonMas.x && e.getX() < (buttonMas.x + 50))
+            {
+                if(e.getY()> buttonMas.y && e.getY() < (buttonMas.y + 30)){
+                    System.out.println("Click Mas");
+                    hilo1.setTiempo(hilo1.getTiempo()-10);
+                    hilo2.setTiempo(hilo2.getTiempo()-10);
+                    hilo3.setTiempo(hilo3.getTiempo()-10);
+                    hilo4.setTiempo(hilo4.getTiempo()-10);
+                    hilo5.setTiempo(hilo5.getTiempo()-10);
+                    bandera = true;
+                }
+            }
+            
+            if(e.getX()> buttonProcesos.x && e.getX() < (buttonProcesos.x + 110))
+            {
+                if(e.getY()> buttonProcesos.y && e.getY() < (buttonProcesos.y + 30)){
+                    System.out.println("Click Procesos");
+                    if (automatico) {creacion.pausa(); tAutamatico ="Desactivado";}
+                    else if (!automatico) {creacion.continuar(); tAutamatico ="Activado";}
+                    bandera = true;
+                    
+                }
+            }
+            
+            
+            if(!bandera)
+            {
+                if(background) background=false;
+                else if(!background) background=true;
+            }
+          
+        }
+
+        public void mouseReleased(MouseEvent e) {
+          
+        }
+      });
+        
         repaint();
         iniciar();
     }
@@ -100,8 +158,17 @@ public class Screen extends JPanel {
             g.clearRect(0, 0, 1000, 700);
             g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            paintBackground(g2);
             
+            if(background) {paintBackground(g2);}
+            buttonMenos = new Point(880, 600);
+            buttonMas = new Point(940, 600);
+            buttonProcesos = new Point(880, 550);
+            paintButtons(g2, buttonMenos,50,30, "-");
+            paintButtons(g2, buttonMas,50,30, "+");
+            paintButtons(g2, buttonProcesos,110,30, tAutamatico);
+            
+            g2.drawString("" + hilo1.getTiempo(), 930, 650);
+ 
             g2.setStroke(new BasicStroke(2));
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f));
             
@@ -159,6 +226,10 @@ public class Screen extends JPanel {
             }catch (Exception e) {
                     repaint();
                 }
+            
+            paintTexto(g2, 780, 80, "Proyecto Simulación");
+            paintTexto(g2, 780, 100, "Colas de Prioridad");
+            
             paintBorde(g2, 45, 45,110, yColaP1 - 60, Color.YELLOW, "Prioridad 1");
             paintBorde(g2, 195, 45,110, yColaP2 - 60, Color.MAGENTA, "Prioridad 2");
             paintBorde(g2, 345, 45,110, yColaP3 - 60, Color.CYAN, "Prioridad 3");
@@ -232,6 +303,33 @@ public class Screen extends JPanel {
     {
         
     }
+    
+    private void paintButtons(Graphics2D g2,Point p,int ancho,int alto, String t)
+    {
+        g2.setStroke(new BasicStroke(2));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f));
+        g2.setPaint(Color.BLACK);
+        Shape s = makeRectangle(p.x, p.y, ancho, alto);
+        g2.draw(s);
+        g2.setPaint(Color.BLUE);
+        g2.fill(s);
+        g2.setPaint(Color.WHITE);
+        g2.drawString(t, p.x+23, p.y+20);
+    }
+    
+    private void paintTexto(Graphics2D g2,int x, int y, String texto)
+    {
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        RenderingHints.VALUE_ANTIALIAS_ON);
+        Font plainFont = new Font("Times New Roman", Font.BOLD, 24);
+        
+        AttributedString as = new AttributedString(texto);
+        as.addAttribute(TextAttribute.FONT, plainFont);
+        
+        g2.setPaint(Color.WHITE);
+        g2.drawString(as.getIterator(),x,y);
+    }
+            
     
     private Color estado(int estado, Color c)
     {

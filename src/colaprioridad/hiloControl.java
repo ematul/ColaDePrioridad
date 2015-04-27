@@ -74,7 +74,7 @@ public class hiloControl implements Runnable{
                     int resultado = hilo2.ejecutar();
                     cont++;
                     prioridad2 = cont;
-                    if(cont == cuantos || resultado == cuantos)
+                    if(cont == cuantos || resultado == 0)
                     {
                         bandera = false;
                     }
@@ -94,7 +94,7 @@ public class hiloControl implements Runnable{
                     int resultado = hilo3.ejecutar();
                     cont++;
                     prioridad3 = cont;
-                    if(cont == cuantos || resultado == cuantos)
+                    if(cont == cuantos || resultado == 0)
                     {
                         bandera = false;
                     }
@@ -113,7 +113,7 @@ public class hiloControl implements Runnable{
                     int resultado = hilo4.ejecutar();
                     cont++;
                     prioridad4 = cont;
-                    if(cont == cuantos || resultado == cuantos)
+                    if(cont == cuantos || resultado == 0)
                     {
                         bandera = false;
                     }
@@ -132,7 +132,7 @@ public class hiloControl implements Runnable{
                     int resultado = hilo5.ejecutar();
                     cont++;
                     prioridad5 = cont;
-                    if(cont == cuantos || resultado == cuantos)
+                    if(cont == cuantos || resultado == 0)
                     {
                         bandera = false;
                     }

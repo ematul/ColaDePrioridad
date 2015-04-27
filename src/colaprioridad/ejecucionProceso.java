@@ -21,12 +21,14 @@ public class ejecucionProceso {
     nodoPrioridad nivel; // nivel de prioridad
     nodoProceso actual; // proceso actual
     ArrayList <nodoProceso> tablaProceso ;
+    int tiempo;
   
   ejecucionProceso(String nombre, nodoPrioridad nivel, ArrayList <nodoProceso> tabla) 
   {
       this.nombre = nombre;
       this.nivel = nivel;
       this.tablaProceso = tabla;
+      this.tiempo = 50;
  }
     
   public int ejecutar()
@@ -56,7 +58,7 @@ public class ejecucionProceso {
                   {  
                       try 
                       {
-                          sleep(50);
+                          sleep(tiempo);
                       } 
                       catch (InterruptedException ex) 
                       {
@@ -101,6 +103,16 @@ public class ejecucionProceso {
       }
       
   }
+
+    public void setTiempo(int tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    public int getTiempo() {
+        return tiempo;
+    }
+  
+    
   
   
     
